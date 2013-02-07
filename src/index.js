@@ -11,7 +11,7 @@
             var inputs = $input.val().split("\n");
             for(var i=0; i<inputs.length; i++){
                 var input = inputs[i];
-                if(input.trim().length==0){
+                if(input.trim().length==0 || input.indexOf("=")==-1){
                     continue;
                 }
                 var output;
@@ -35,7 +35,7 @@
     function makeRecord(formula, expectation, output){
         var $record = $("<div>");
         var text;
-        if(expectation==output){
+        if(expectation==output || (isNaN(expectation) && isNaN(output))){
             $record.addClass("alert-success");
             text = "Yes: "+formula+" = "+expectation;
         }else{
