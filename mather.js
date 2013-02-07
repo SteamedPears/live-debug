@@ -20,7 +20,6 @@ var Mather = (function(Mather){
                 val = broken[key];
             }
             if(val instanceof Array){
-                console.log(val, val instanceof Array);
                 val = val[Math.floor(Math.random()*val.length)];
             }
             current[key] = val;
@@ -166,14 +165,24 @@ var Mather = (function(Mather){
         }
     ]
     
-    broken.operators = {
-        "(":1,
-        ")":1,
-        "*":5,
-        "/":4,
-        "+":3,
-        "-":2
-    }
+    broken.operators = [
+        {
+            "(":1,
+            ")":1,
+            "*":5,
+            "/":4,
+            "+":3,
+            "-":2
+        },
+        {
+            "(":1,
+            ")":1,
+            "*":2,
+            "/":2,
+            "+":2,
+            "-":2
+        }
+    ]
     
     return Mather;
 })(Mather || {});
