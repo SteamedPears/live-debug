@@ -10,6 +10,23 @@ var Mather = (function(Mather){
         console.log((sample==result)+"; result:"+result+" - expected:"+sample);
     }
     
+    Mather.randomize = function(){
+        current = {};
+        for(var key in working){
+            var val;
+            if(Math.random()>0.5){
+                val = working[key];
+            }else{
+                val = broken[key];
+            }
+            if(val instanceof Array){
+                console.log(val, val instanceof Array);
+                val = val[Math.floor(Math.random()*val.length)];
+            }
+            current[key] = val;
+        }
+    }
+    
     var OPEN_PAREN = "(";
     var CLOSE_PAREN = ")";
     var NUMBERS = "0123456789.";
@@ -127,16 +144,16 @@ var Mather = (function(Mather){
     }
     
     broken["/"] = function(x,y){
-        return Math.round(x,y);
+        return Math.round(x/y);
     }
     
     broken.operators = {
         "(":1,
         ")":1,
-        "*":4,
-        "/":3,
-        "+":2,
-        "-":1
+        "*":5,
+        "/":4,
+        "+":3,
+        "-":2
     }
     
     return Mather;
