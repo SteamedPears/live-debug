@@ -1,5 +1,8 @@
 var Mather = (function(Mather){
 
+    Mather.minBrokeness = 2;
+    Mather.maxBrokeness = 3;
+
     Mather.parse = function(input){
         return parse(input, current);
     }
@@ -12,17 +15,22 @@ var Mather = (function(Mather){
     
     Mather.randomize = function(){
         current = {};
-        for(var key in working){
-            var val;
-            if(Math.random()>0.5){
-                val = working[key];
-            }else{
-                val = broken[key];
+        var brokenCount = 0;
+        while(brokenCount<Mather.minBrokeness || brokenCount>Mather.maxBrokeness){
+            brokenCount = 0;
+            for(var key in working){
+                var val;
+                if(Math.random()>0.5){
+                    val = working[key];
+                }else{
+                    brokenCount++;
+                    val = broken[key];
+                }
+                if(val instanceof Array){
+                    val = val[Math.floor(Math.random()*val.length)];
+                }
+                current[key] = val;
             }
-            if(val instanceof Array){
-                val = val[Math.floor(Math.random()*val.length)];
-            }
-            current[key] = val;
         }
     }
     
@@ -135,6 +143,9 @@ var Mather = (function(Mather){
         },
         function(x,y){
             return y+y;
+        },
+        function(x,y){
+            return x+1;
         }
     ]
     
@@ -143,7 +154,10 @@ var Mather = (function(Mather){
             return y-x;
         },
         function(x,y){
-            return x+1;
+            return x-1;
+        },
+        function(x,y){
+            return Math.abs(x-y);
         }
     ]
     
@@ -152,7 +166,7 @@ var Mather = (function(Mather){
             return y*y;
         },
         function(x,y){
-            return Math.abs(x)*Math.abs(y);
+            return Math.abs(x*y);
         }
     ]
     
