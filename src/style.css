@@ -1,0 +1,22 @@
+body{
+    padding:2em;
+}
+
+.left-align{
+    float:left;
+    width:40%;
+    height:100%;
+}
+
+.right-align{
+    float:right;
+    width:40%;
+    height:100%;
+}
+
+#input-field{
+    width:100%;
+    resize:none;
+    line-height:normal;
+}
+

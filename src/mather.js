@@ -11,22 +11,18 @@ var Mather = (function(Mather){
     }
     
     Mather.randomize = function(){
-        somethingBroke = false;
-        while(!somethingBroke){
-            current = {};
-            for(var key in working){
-                var val;
-                if(Math.random()>0.5){
-                    val = working[key];
-                }else{
-                    somethingBroke = true;
-                    val = broken[key];
-                }
-                if(val instanceof Array){
-                    val = val[Math.floor(Math.random()*val.length)];
-                }
-                current[key] = val;
+        current = {};
+        for(var key in working){
+            var val;
+            if(Math.random()>0.5){
+                val = working[key];
+            }else{
+                val = broken[key];
             }
+            if(val instanceof Array){
+                val = val[Math.floor(Math.random()*val.length)];
+            }
+            current[key] = val;
         }
     }
     
