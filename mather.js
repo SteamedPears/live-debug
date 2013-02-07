@@ -120,6 +120,7 @@ var Mather = (function(Mather){
         return x/y;
     }
     
+    //precedence; ( and ) must always be smallest
     working.operators = {
         "(":1,
         ")":1,
@@ -132,20 +133,38 @@ var Mather = (function(Mather){
     broken["+"] = [
         function(x,y){
             return x;
+        },
+        function(x,y){
+            return y+y;
         }
     ]
     
-    broken["-"] = function(x,y){
-        return y-x;
-    }
+    broken["-"] = [
+        function(x,y){
+            return y-x;
+        },
+        function(x,y){
+            return x+1;
+        }
+    ]
     
-    broken["*"] = function(x,y){
-        return y*y;
-    }
+    broken["*"] = [
+        function(x,y){
+            return y*y;
+        },
+        function(x,y){
+            return Math.abs(x)*Math.abs(y);
+        }
+    ]
     
-    broken["/"] = function(x,y){
-        return Math.round(x/y);
-    }
+    broken["/"] = [
+        function(x,y){
+            return Math.round(x/y);
+        },
+        function(x,y){
+            return y/x;
+        }
+    ]
     
     broken.operators = {
         "(":1,
