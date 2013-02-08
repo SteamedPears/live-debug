@@ -132,19 +132,19 @@ var Mather = (function(Mather){
     var broken = {};
     var current = working;
     
-    working["+"] = function(x,y){
+    working[PLUS] = function(x,y){
         return x+y;
     }
     
-    working["-"] = function(x,y){
+    working[MINUS] = function(x,y){
         return x-y;
     }
     
-    working["*"] = function(x,y){
+    working[TIMES] = function(x,y){
         return x*y;
     }
     
-    working["/"] = function(x,y){
+    working[DIVIDE] = function(x,y){
         return x/y;
     }
     
@@ -160,7 +160,7 @@ var Mather = (function(Mather){
     
     working.numbers = "0123456789.";
     
-    broken["+"] = [
+    broken[PLUS] = [
         function(x,y){
             return x;
         },
@@ -172,7 +172,7 @@ var Mather = (function(Mather){
         }
     ]
     
-    broken["-"] = [
+    broken[MINUS] = [
         function(x,y){
             return y-x;
         },
@@ -184,7 +184,7 @@ var Mather = (function(Mather){
         }
     ]
     
-    broken["*"] = [
+    broken[TIMES] = [
         function(x,y){
             return y*y;
         },
@@ -193,7 +193,7 @@ var Mather = (function(Mather){
         }
     ]
     
-    broken["/"] = [
+    broken[DIVIDE] = [
         function(x,y){
             return Math.round(x/y);
         },
