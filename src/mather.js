@@ -39,7 +39,10 @@ var Mather = (function(Mather){
     
     var OPEN_PAREN = "(";
     var CLOSE_PAREN = ")";
-    var NUMBERS = "0123456789.";
+    var PLUS = "+";
+    var MINUS = "-";
+    var TIMES = "*";
+    var DIVIDE = "/";
     
     //Shunting Yard, see: http://stackoverflow.com/a/47717
     var parse = function(input, computer){
@@ -48,7 +51,7 @@ var Mather = (function(Mather){
         var curNum = "";
         for(var i=0; i<input.length; i++){
             var cur = input.charAt(i);
-            if(isNumber(cur)){
+            if(isNumber(computer, cur)){
                 curNum+=cur;
             }else{
                 if(curNum.length>0){
@@ -71,7 +74,7 @@ var Mather = (function(Mather){
                                 continue;
                             }
                         }
-                        if(isSign(cur)){
+                        if(isSign(computer, cur)){
                             curNum+=cur;
                         }else{
                             throw "Could not parse input";
@@ -113,12 +116,12 @@ var Mather = (function(Mather){
         return getPrecedence(computer, x)>getPrecedence(computer, y);
     }
     
-    var isNumber = function(input){
-        return NUMBERS.indexOf(input)>-1;
+    var isNumber = function(computer, input){
+        return computer.numbers.indexOf(input)>-1;
     }
     
-    var isSign = function(input){
-        return input=="+" || input=="-";
+    var isSign = function(computer, input){
+        return input==PLUS || input==MINUS;
     }
     
     var peek = function(stack){
@@ -154,6 +157,8 @@ var Mather = (function(Mather){
         "+":2,
         "-":2
     }
+    
+    working.numbers = "0123456789.";
     
     broken["+"] = [
         function(x,y){
@@ -214,6 +219,10 @@ var Mather = (function(Mather){
             "+":2,
             "-":2
         }
+    ]
+    
+    broken.numbers = [
+        "0123456789"
     ]
     
     return Mather;
