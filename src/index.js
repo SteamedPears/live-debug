@@ -26,7 +26,7 @@
                 $output.append(makeRecord(formula, expectation, output));
             }
             return false;
-        });
+        }).submit();
         
         $("#randomize").on("click",Mather.randomize);
     
