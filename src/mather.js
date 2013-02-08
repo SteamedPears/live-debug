@@ -7,10 +7,13 @@ var Mather = (function(Mather){
         return parse(input, current);
     }
     
-    Mather.compare = function(input){
-        var result = Mather.parse(input);
-        var sample = eval(input);
-        console.log((sample==result)+"; result:"+result+" - expected:"+sample);
+    Mather.getBrokenessID = function(){
+        var result="";
+        for(var key in current){
+            var index = broken[key].indexOf(current[key]);
+            result+=index;
+        }
+        return result;
     }
     
     Mather.randomize = function(){
@@ -61,7 +64,18 @@ var Mather = (function(Mather){
                         }
                         operators.pop();
                     }else if(operators.length == 0 || isPrecedent(computer, cur, peek(operators))){
-                        operators.push(cur);
+                        if(i>0){
+                            var prev = input.charAt(i-1);
+                            if(!isOperator(computer, prev) || prev==CLOSE_PAREN){
+                                operators.push(cur);
+                                continue;
+                            }
+                        }
+                        if(isSign(cur)){
+                            curNum+=cur;
+                        }else{
+                            throw "Could not parse input";
+                        }
                     }else{
                         performOperation(computer,numbers,operators);
                         i--;
@@ -101,6 +115,10 @@ var Mather = (function(Mather){
     
     var isNumber = function(input){
         return NUMBERS.indexOf(input)>-1;
+    }
+    
+    var isSign = function(input){
+        return input=="+" || input=="-";
     }
     
     var peek = function(stack){
