@@ -21,13 +21,10 @@
             Your co-worker has implemented a math parser, but doesn't think he needs to test it. You, of course, know that code <i>must always</i> be unit-tested! Otherwise, when someone goes to "improve" it, they might not notice when they break something.
         </p>
         <p>
-            The parser can perform +,-,/, and *, and supports paranthesis. It's easy enough to feed garbage input to the system, and all bets are off if you do. You're only interested in ensuring that valid inputs get back valid results. However, it should handle something like 1.5+3/2*(9-2*8/(-2)+9)-6/24 without a problem.
+            The parser can perform +,-,/, and *, and supports paranthesis. It's easy enough to feed garbage input to the system, and all bets are off if you do. You're only interested in ensuring that valid inputs get back valid results. However, it should handle something like <code>1.5+3/2*(9-2*8/(-2)+9)-6/24</code> without a problem.
         </p>
         <p>
-            Write a series of expressions -- one per line -- of the form [expression] = [value], such as
-            <div class="well">
-                1.5+3/2*(9-2*8/(-2)+9)-6/24 = 40.25   
-            </div>
+            Write a series of expressions -- one per line -- of the form <code>[expression] = [value]</code>, such as <code>1.5+3/2*(9-2*8/(-2)+9)-6/24 = 40.25</code>   
             to test against the parser. Initially, the parser should work exactly as expected. Hitting the "Improve" button will cause something to break, though!
         </p>
         <p><b>
@@ -57,6 +54,19 @@ There needs to be an equals sign asserting something for the parser to read the 
             <div id="output">
             
             </div>
+        </div>
+        <div style="clear:both">
+            <p>
+            When you're comfortable with your ability to determine what's wrong, you can <a href="https://github.com/SteamedPears/live-debug/archive/clean-tests.zip">download</a> the source of this application and try to write actual unit tests. We've already gone ahead and taken care of all the messy stuff, you just need to add your tests to /tests/test.js. Then if you open up /tests/index.html in your browser, they should run!
+            </p>
+            <p>
+            These unit tests are written in <a href="http://qunitjs.com/">QUnit</a>, which is javascript specific, but most unit testing frameworks are basically the same:
+                <ul>
+                    <li>Provide a statement</li>
+                    <li>Make an assertion of what the result should be</li>
+                </ul>
+            It's exactly what you've been doing here, just a bit more formal.
+            </p>
         </div>
     </body>
 </html>
